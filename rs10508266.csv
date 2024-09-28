@@ -1,4 +1,4 @@
-Country_Code,Allele Frequency
+Country_Code,T_Number
 Population,
 ALL,0.204
 AFR,0.014
@@ -13,8 +13,8 @@ AMR,0.212
   CLM,0.197
   MXL,0.195
   PEL,0.206
-  PUR,0.24
-EAS,0.31
+  PUR,0.240
+EAS,0.310
   CDX,0.274
   CHB,0.364
   CHS,0.305
@@ -27,8 +27,8 @@ EUR,0.253
   IBS,0.248
   TSI,0.276
 SAS,0.294
-  BEB,0.25
+  BEB,0.250
   GIH,0.316
   ITU,0.284
-  PJL,0.37
-  STU,0.25
+  PJL,0.370
+  STU,0.250

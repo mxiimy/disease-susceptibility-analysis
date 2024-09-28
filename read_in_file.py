@@ -10,9 +10,23 @@ import os
 # Set the default directory
 os.chdir(r'C:\Users\Owner\Documents\GitHub\disease-susceptibility-analysis')
 
-# Load your data
-# Assuming your data is in a CSV file with no header. If it has a header, set 'header=0'
-df = pd.read_csv('data1.csv', header=None)
+# Original CSV file name
+original_file = '1000genomesprojectphase3-PopulationGenotypes-Homo_sapiens_Variation_Population_rs10841302.csv'
+
+# Function to extract rs_number from the filename
+def extract_rs_number(filename):
+    start = filename.find('rs')
+    if start != -1:
+        end = filename.find('.', start)  # Locate the end of the rs_number before the file extension
+        if end != -1:
+            return filename[start:end]  # Extract 'rs' and the following digits
+    return None
+
+# Extract rs_number from the file name
+rs_number = extract_rs_number(original_file)
+
+# Load your data (assuming the data is in a CSV format with no header. Adjust 'header=0' if there's a header)
+df = pd.read_csv(original_file, header=None)
 
 # Select only the first and third columns
 df = df[[0, 2]]
@@ -34,13 +48,19 @@ def extract_t_number(col):
 
 # Apply the functions to the respective columns
 df['Country_Code'] = df['Column1'].apply(extract_country_code)
-df['Allele Frequency'] = df['Column2'].apply(extract_t_number)
+df['T_Number'] = df['Column2'].apply(extract_t_number)
 
 # Select only the necessary columns
-output_df = df[['Country_Code', 'Allele Frequency']]
+output_df = df[['Country_Code', 'T_Number']]
 
-# Save the result to a new CSV
-output_df.to_csv('rs10508266.csv', index=False)
+# Generate the output CSV filename based on the rs_number
+if rs_number:
+    output_filename = f'{rs_number}.csv'
+    # Save the result to a new CSV
+    output_df.to_csv(output_filename, index=False)
+    print(f"Saved to {output_filename}")
+else:
+    print("rs_number not found in the file name")
 
 # Print the first few rows to verify
 print(output_df.head())
