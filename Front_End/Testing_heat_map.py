@@ -30,4 +30,5 @@ fig.update_layout(
 pio.write_html(fig, 'map.html')
 
 # Optional: Display the map in the browser after saving (uncomment the following line if needed)
-# fig.show()
+fig.show()
+
