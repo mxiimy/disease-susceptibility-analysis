@@ -27,7 +27,7 @@ fig.update_layout(
 )
 
 # Save the map as an HTML file
-pio.write_html(fig, 'map.html')
+pio.write_html(fig, '../map.html')
 
 # Optional: Display the map in the browser after saving (uncomment the following line if needed)
 fig.show()
