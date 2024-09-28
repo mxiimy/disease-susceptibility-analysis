@@ -1,15 +1,16 @@
 import plotly.express as px
 import pandas as pd
+import plotly.io as pio
 
-# Load the data (assuming 'data.csv' is a large file with many rows)
+# Load the data (assuming 'AQI and Lat Long of Countries.csv' is a large file with many rows)
 data = pd.read_csv('AQI and Lat Long of Countries.csv')
 
 # Check if the data loads correctly and inspect the first few rows
 print(data.head())
 
 # Plot the data using a scatter plot on the map
-# 'color' is used to represent the heatmap value (Sample_Susceptibility)
-# 'size' will adjust the marker size based on the susceptibility value
+# 'color' is used to represent the heatmap value (AQI Value)
+# 'size' will adjust the marker size based on the AQI value
 fig = px.scatter_mapbox(data, lat='lat', lon='lng',
                         color='AQI Value',
                         size='AQI Value',
@@ -25,5 +26,8 @@ fig.update_layout(
     height=600  # Set the map height
 )
 
-# Display the map
-fig.show()
+# Save the map as an HTML file
+pio.write_html(fig, 'map.html')
+
+# Optional: Display the map in the browser after saving (uncomment the following line if needed)
+# fig.show()
