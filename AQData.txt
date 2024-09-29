@@ -1,0 +1,23 @@
+#Data taken on 9-29-2024
+#All pollutants reported in micrograms per liter
+#Location Name, Dataset Code, PM2.5, PM10, O3, NO2, SO2, CO, LAT, LONG
+Guizhou, SRX22699113, 14, 22, 42, 12.5, 4.5, 400
+Fox Chace Cancer Centre, SRX22407068, 4, 7, 44, 14.3, 1.6, 343.5
+Cambridge, SRX26206947, 4.1, 10.7, 36.7, 12, 1.6, 240
+Seoul, SRX26157172, 4, 8, 58.2, 20.9, 5.5, 366.4
+Sungkyunkwan University, SRX25038172, 4, 8, 58.2, 20.9, 5.5, 366.4
+Zhongshan, SRX24512907, 17, 36, 74, 16, 4, 500
+European Bioinformatics Institute, ERX12058294, 4.1, 10.7, 36.7, 12, 1.6, 240
+Yale University, SRX25235437, 4, 9, 38, 6.8, 229
+Zhejiang, SRX23020717, 9, 22, 59, 14, 6, 500
+Spain (Madrid), SRX23739148, 3.7, 6.9, 41.9, 10, 3, 250
+Bangkok Thailand, SRX22030636, 7, 14, 30, 25.4, 366.4
+Virginia USA, SRX21355733, 11.7, 22, 20, 6.2, 0, 229
+Ohio USA, SRX21238097, 0.8, 11, 22, 5.6, 2.6, 242.7
+Amsterdam, SRX1788655, 2, 8.5, 72.5, 13.3, 2.5, 364.5
+Nagoya Japan, DRS220882, 10, 17, 34, 16.9, 2.6, 343.5
+Shanghai, SRX12807038, 17, 41, 69, 21, 5, 472
+San Francisco, SRX7462124, 3.3, 9.1, 58, 2.8, 3, 343.5
+Nova Scotia Canada, SRX12033789, 3.8, 7, 52, 2.4, ,
+Palo Alto USA, SRX576505, 4.7, 9.1, 58, 2.8, 3, 343
+Paris France, ERX1789773, 8.6, 15.8, 51.8, 10.7, ,
