@@ -6,7 +6,6 @@ from rpy2.robjects import pandas2ri, Formula
 from rpy2.robjects.conversion import localconverter
 from rpy2.robjects.packages import importr
 from statsmodels.stats.multitest import multipletests
-import pandas as pd
 
 # Design matrix should have cluster numbers in a column named 'Target'.
 def compute_differentially_expressed_genes(count_matrix: str, design_matrix: str, cluster_number: int, num_clusters: int):
