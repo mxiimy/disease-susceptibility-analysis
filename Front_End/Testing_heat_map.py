@@ -33,7 +33,7 @@ fig.add_trace(go.Scattermapbox(
     marker=go.scattermapbox.Marker(
         size=data['CO AQI Value'],
         color=data['CO AQI Value'],
-        colorscale='Cividis',
+        colorscale='Magma',
         sizemode='area',
         sizeref=2.*max(data['CO AQI Value'])/(15.**2),
         colorbar=dict(title="CO AQI"),
@@ -50,7 +50,7 @@ fig.add_trace(go.Scattermapbox(
     marker=go.scattermapbox.Marker(
         size=data['Ozone AQI Value'],
         color=data['Ozone AQI Value'],
-        colorscale='Plasma',
+        colorscale='Aggrnyl',
         sizemode='area',
         sizeref=2.*max(data['Ozone AQI Value'])/(15.**2),
         colorbar=dict(title="Ozone AQI"),
@@ -96,7 +96,7 @@ fig.update_layout(
 )
 
 # Save the map as an HTML file
-pio.write_html(fig, 'map_with_buttons.html')
+pio.write_html(fig, '../map_with_buttons.html')
 
 # Optional: Display the map in the browser
 fig.show()
