@@ -3,7 +3,7 @@ import pandas as pd
 import plotly.io as pio
 
 data = pd.read_csv('AQI and Lat Long of Countries.csv')
-sample_data = pd.read_csv('data.csv')
+sample_data = pd.read_csv('AQdata.csv')
 
 fig = go.Figure()
 
@@ -13,15 +13,15 @@ fig.add_trace(go.Scattermapbox(
     lon=sample_data['lng'],
     mode='markers',
     marker=go.scattermapbox.Marker(
-        size=sample_data['Sample_Susceptibility'],
-        color=sample_data['Sample_Susceptibility'],
+        size=sample_data['PM2.5'],
+        color=sample_data['PM2.5'],
         colorscale='Viridis',
         sizemode='area',
-        sizeref=2.*max(sample_data['Sample_Susceptibility'])/(15.**2),
-        colorbar=dict(title="Sample Susceptibility"),
+        sizeref=2.*max(sample_data['PM2.5'])/(15.**2),
+        colorbar=dict(title="PM2.5"),
     ),
     visible=True,
-    hovertemplate='<b>Sample Susceptibility</b> <br>'+
+    hovertemplate='<b>PM2.5</b> <br>'+
                   '<b>Coordinates:</b> (%{lon:.2f}, %{lat:.2f})<br>' +
                   '<b>Value:</b> %{marker.color:.2f}<br>' +
                   '<extra></extra>',
