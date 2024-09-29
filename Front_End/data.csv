@@ -1,4 +1,4 @@
-Date,Latitude,Longitude,Sample_Susceptibility
+Date,lat,lng,Sample_Susceptibility
 01/01/2020,34.0522,-118.2437,7.2
 01/01/2020,51.5074,-0.1278,8.5
 01/01/2020,35.6895,139.6917,6.9
