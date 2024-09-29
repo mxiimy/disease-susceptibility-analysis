@@ -2,10 +2,8 @@ import plotly.graph_objects as go
 import pandas as pd
 import plotly.io as pio
 
-
 # Load your dataset
 data = pd.read_csv('AQI and Lat Long of Countries.csv')
-data = pd.read_csv('AQI and Lat Long of Countries.csv')  
 
 # Initialize a blank figure
 fig = go.Figure()
@@ -109,4 +107,3 @@ pio.write_html(fig, '../map_with_buttons.html')
 
 # Optional: Display the map in the browser
 fig.show()
-
