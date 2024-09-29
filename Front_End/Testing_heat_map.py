@@ -1,29 +1,109 @@
-import plotly.express as px
+import plotly.graph_objects as go
 import pandas as pd
+import plotly.io as pio
 
-# Load the data (assuming 'data.csv' is a large file with many rows)
+# Load your dataset
 data = pd.read_csv('AQI and Lat Long of Countries.csv')
 
-# Check if the data loads correctly and inspect the first few rows
-print(data.head())
+# Initialize a blank figure
+fig = go.Figure()
 
-# Plot the data using a scatter plot on the map
-# 'color' is used to represent the heatmap value (Sample_Susceptibility)
-# 'size' will adjust the marker size based on the susceptibility value
-fig = px.scatter_mapbox(data, lat='lat', lon='lng',
-                        color='AQI Value',
-                        size='AQI Value',
-                        color_continuous_scale='Viridis',  # Color scale for the points
-                        size_max=15,  # Maximum size of the points
-                        zoom=1,  # Adjust zoom for a global view
-                        mapbox_style="carto-positron")  # You can change the style as you prefer
+# Add NO2 AQI trace (visible by default)
+fig.add_trace(go.Scattermapbox(
+    lat=data['lat'],
+    lon=data['lng'],
+    mode='markers',
+    marker=go.scattermapbox.Marker(
+        size=data['NO2 AQI Value'],
+        color=data['NO2 AQI Value'],
+        colorscale='Viridis',
+        sizemode='area',
+        sizeref=2.*max(data['NO2 AQI Value'])/(15.**2),
+        colorbar=dict(title="NO2 AQI"),
+    ),
+    name='NO2 AQI',
+    visible=True  # Visible by default
+))
 
-# Update layout to make the map bigger
+# Add CO AQI trace (hidden initially)
+fig.add_trace(go.Scattermapbox(
+    lat=data['lat'],
+    lon=data['lng'],
+    mode='markers',
+    marker=go.scattermapbox.Marker(
+        size=data['CO AQI Value'],
+        color=data['CO AQI Value'],
+        colorscale='Magma',
+        sizemode='area',
+        sizeref=2.*max(data['CO AQI Value'])/(15.**2),
+        colorbar=dict(title="CO AQI"),
+    ),
+    name='CO AQI',
+    visible=False  # Hidden by default
+))
+
+# Add Ozone AQI trace (hidden initially)
+fig.add_trace(go.Scattermapbox(
+    lat=data['lat'],
+    lon=data['lng'],
+    mode='markers',
+    marker=go.scattermapbox.Marker(
+        size=data['Ozone AQI Value'],
+        color=data['Ozone AQI Value'],
+        colorscale='Aggrnyl',
+        sizemode='area',
+        sizeref=2.*max(data['Ozone AQI Value'])/(15.**2),
+        colorbar=dict(title="Ozone AQI"),
+    ),
+    name='Ozone AQI',
+    visible=False  # Hidden by default
+))
+
+# Set up the layout, including the map style
 fig.update_layout(
-    mapbox_accesstoken='your_mapbox_access_token',  # If needed, add Mapbox token here
-    margin={"r":0,"t":0,"l":0,"b":0},  # Removing margins for a full-screen map
-    height=600  # Set the map height
+    mapbox=dict(
+        style="carto-positron",
+        zoom=1,
+        center=dict(lat=20, lon=0),  # Centered globally
+    ),
+    margin={"r": 0, "t": 0, "l": 0, "b": 0},
+    height=600,
+
+    # Add dropdown menu buttons to switch between datasets
+    updatemenus=[
+        {
+            "buttons": [
+                {
+                    "args": [{"visible": [True, False, False]}],  # Show NO2 AQI only
+                    "label": "NO2 AQI",
+                    "method": "update"
+                },
+                {
+                    "args": [{"visible": [False, True, False]}],  # Show CO AQI only
+                    "label": "CO AQI",
+                    "method": "update"
+                },
+                {
+                    "args": [{"visible": [False, False, True]}],  # Show Ozone AQI only
+                    "label": "Ozone AQI",
+                    "method": "update"
+                }
+            ],
+            "direction": "down",
+            "showactive": True,
+        }
+    ]
 )
 
-# Display the map
+fig.update_traces(
+    hovertemplate='<b>Coordinates:</b> (%{lon:.2f}, %{lat:.2f})<br>' +  # Longitude, Latitude
+                  '<b>AQI Value:</b> %{marker.color:.2f}<br>' +  # The value you're displaying (AQI Value in this case)
+                  '<extra></extra>',  # Removes the "trace" label from the hover box
+)
+
+
+# Save the map as an HTML file
+pio.write_html(fig, '../map_with_buttons.html')
+
+# Optional: Display the map in the browser
 fig.show()
