@@ -13,7 +13,7 @@ x = np.array([x, x])
 y = np.linspace(0, 10, 100)
 
 
-def get_weights(env_data: np.ndarray, gene_expression: np.ndarray):
+def get_weights(env_data: np.ndarray, maf: np.ndarray):
     """
     :param x:
     :param y:
@@ -42,8 +42,4 @@ if __name__ == '__main__':
 
     location = ...
     sample_env_data = get_env_data(location)
-    gene_expression_vec = predict(model, env_data)
-
-    #
-    risks = ...
-    risk = get_risk_score(gene_expression_vec, risks)
+    maf = predict(model, env_data)
