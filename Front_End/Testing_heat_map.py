@@ -6,23 +6,22 @@ import plotly.io as pio
 # Load the AQI and Lat/Long data
 data = pd.read_csv('AQI and Lat Long of Countries.csv')
 
-# Load the Natural Earth shapefile for landmasses
-gdf = gpd.read_file("/Users/karenriani/Downloads/ne_110m_admin_0_countries/ne_110m_admin_0_countries.shp")
+# For white land masses: Load the Natural Earth shapefile for landmasses
+# gdf = gpd.read_file("ne_110m_admin_0_countries.shp")
 
 # Initialize a blank figure
 fig = go.Figure()
 
-
 # Layer 1: Add white landmasses using centroids of the countries
-fig.add_trace(go.Scattermapbox(
-    lat=gdf.geometry.centroid.y,
-    lon=gdf.geometry.centroid.x,
-    mode="markers",
-    marker=dict(size=0, color="white"),  # White landmasses
-    name="Landmasses",
-    hoverinfo="none",
-    showlegend=False
-))
+# fig.add_trace(go.Scattermapbox(
+#     lat=gdf.geometry.centroid.y,
+#     lon=gdf.geometry.centroid.x,
+#     mode="markers",
+#     marker=dict(size=0, color="white"),  # White landmasses
+#     name="Landmasses",
+#     hoverinfo="none",
+#     showlegend=False
+# ))
 
 # Add NO2 AQI trace (visible by default)
 fig.add_trace(go.Scattermapbox(
