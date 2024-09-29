@@ -1,12 +1,27 @@
 import plotly.graph_objects as go
 import pandas as pd
+import geopandas as gpd
 import plotly.io as pio
 
-# Load your dataset
+# Load the AQI and Lat/Long data
 data = pd.read_csv('AQI and Lat Long of Countries.csv')
+
+# For white land masses: Load the Natural Earth shapefile for landmasses
+# gdf = gpd.read_file("ne_110m_admin_0_countries.shp")
 
 # Initialize a blank figure
 fig = go.Figure()
+
+# Layer 1: Add white landmasses using centroids of the countries
+# fig.add_trace(go.Scattermapbox(
+#     lat=gdf.geometry.centroid.y,
+#     lon=gdf.geometry.centroid.x,
+#     mode="markers",
+#     marker=dict(size=0, color="white"),  # White landmasses
+#     name="Landmasses",
+#     hoverinfo="none",
+#     showlegend=False
+# ))
 
 # Add NO2 AQI trace (visible by default)
 fig.add_trace(go.Scattermapbox(
@@ -59,10 +74,11 @@ fig.add_trace(go.Scattermapbox(
     visible=False  # Hidden by default
 ))
 
-# Set up the layout, including the map style
+
+# Set up the layout, including the map style and dropdown for datasets
 fig.update_layout(
     mapbox=dict(
-        style="carto-positron",
+        style="carto-darkmatter",  # Light map style
         zoom=1,
         center=dict(lat=20, lon=0),  # Centered globally
     ),
@@ -74,17 +90,17 @@ fig.update_layout(
         {
             "buttons": [
                 {
-                    "args": [{"visible": [True, False, False]}],  # Show NO2 AQI only
+                    "args": [{"visible": [True, False, False, True, False]}],  # Show NO2 AQI only
                     "label": "NO2 AQI",
                     "method": "update"
                 },
                 {
-                    "args": [{"visible": [False, True, False]}],  # Show CO AQI only
+                    "args": [{"visible": [False, True, False, False, True]}],  # Show CO AQI only
                     "label": "CO AQI",
                     "method": "update"
                 },
                 {
-                    "args": [{"visible": [False, False, True]}],  # Show Ozone AQI only
+                    "args": [{"visible": [False, False, True, False, True]}],  # Show Ozone AQI only
                     "label": "Ozone AQI",
                     "method": "update"
                 }
@@ -95,15 +111,15 @@ fig.update_layout(
     ]
 )
 
+# Add hover template for AQI values
 fig.update_traces(
-    hovertemplate='<b>Coordinates:</b> (%{lon:.2f}, %{lat:.2f})<br>' +  # Longitude, Latitude
-                  '<b>AQI Value:</b> %{marker.color:.2f}<br>' +  # The value you're displaying (AQI Value in this case)
-                  '<extra></extra>',  # Removes the "trace" label from the hover box
+    hovertemplate='<b>Coordinates:</b> (%{lon:.2f}, %{lat:.2f})<br>' +
+                  '<b>AQI Value:</b> %{marker.color:.2f}<br>' +
+                  '<extra></extra>'
 )
 
-
 # Save the map as an HTML file
-pio.write_html(fig, '../map_with_buttons.html')
+pio.write_html(fig, 'map_with_land_and_dropdown.html')
 
 # Optional: Display the map in the browser
 fig.show()
