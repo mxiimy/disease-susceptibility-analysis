@@ -95,6 +95,13 @@ fig.update_layout(
     ]
 )
 
+fig.update_traces(
+    hovertemplate='<b>Coordinates:</b> (%{lon:.2f}, %{lat:.2f})<br>' +  # Longitude, Latitude
+                  '<b>AQI Value:</b> %{marker.color:.2f}<br>' +  # The value you're displaying (AQI Value in this case)
+                  '<extra></extra>',  # Removes the "trace" label from the hover box
+)
+
+
 # Save the map as an HTML file
 pio.write_html(fig, '../map_with_buttons.html')
 
