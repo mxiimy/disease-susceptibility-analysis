@@ -40,7 +40,7 @@ def extract_country_code(col):
 
 # Function to extract the T number from the second column
 def extract_t_number(col):
-    parts = col.split('T:')
+    parts = col.split('C:')
     if len(parts) > 1:
         t_part = parts[1].split()[0]  # Extract the number after 'T:'
         return t_part
