@@ -8,10 +8,13 @@ from rpy2.robjects.packages import importr
 from statsmodels.stats.multitest import multipletests
 
 # Design matrix should have cluster numbers in a column named 'Target'.
+# Clusters should be labelled 0 - cluster_number - 1.
 def compute_differentially_expressed_genes(count_matrix: str, design_matrix: str, cluster_number: int, num_clusters: int):
     count_matrix = pd.read_csv(count_matrix)
     design_matrix = pd.read_csv(design_matrix)
-    design_matrix = design_matrix.replace([0])
+    cluster_labels_without_curr = list(range(cluster_number))
+    cluster_labels_without_curr.remove(cluster_number)
+    design_matrix = design_matrix.replace(cluster_labels_without_curr, [1])
 
     base = importr('base')
     stats = importr('stats')
